@@ -1,0 +1,9 @@
+\BOOKMARK [1][-]{section.1}{The Two Body Problem}{}% 1
+\BOOKMARK [1][-]{section.2}{The Kepler Problem}{}% 2
+\BOOKMARK [1][-]{section.3}{Kepler's Equation}{}% 3
+\BOOKMARK [2][-]{subsection.3.1}{Iterative Method}{section.3}% 4
+\BOOKMARK [2][-]{subsection.3.2}{Aitken's Acceleration Method}{section.3}% 5
+\BOOKMARK [2][-]{subsection.3.3}{Root-Finding Methods}{section.3}% 6
+\BOOKMARK [3][-]{subsubsection.3.3.1}{Interval Bisection Method}{subsection.3.3}% 7
+\BOOKMARK [3][-]{subsubsection.3.3.2}{Newton's Method}{subsection.3.3}% 8
+\BOOKMARK [3][-]{subsubsection.3.3.3}{Secant Method}{subsection.3.3}% 9

@@ -1,0 +1,260 @@
+\documentclass[10pt]{article}
+
+\usepackage{graphicx, amssymb, amsmath, hyperref}
+
+\topmargin      	= -0.25in
+\headheight		= 0in
+\headsep		= 0in
+\topskip		= 0in
+\oddsidemargin   	= -0.25in
+\evensidemargin   	= -0.25in
+\textheight  		= 9.5in
+\textwidth      	= 7in
+\footskip		= 0in
+
+\pagestyle{empty}
+
+\renewcommand{\baselinestretch}{1.0}
+
+\begin{document}
+
+\begin{center}
+{\LARGE \bf The Kepler Problem \& Root Finding} \\
+\end{center}
+\begin{center}
+Eric Angle \\
+\today
+\end{center}
+
+\section{The Two Body Problem}
+\noindent The classical lagrangian $L$ for a system of two particles with masses $m_1,m_2$ and positions ${\bf r}_1,{\bf r}_2$ interacting through a central potential $U\left(\left|{\bf r}_2-{\bf r}_1\right|\right)$ is
+\begin{equation*}
+L = \frac{1}{2}m_1\dot{\bf r}_1^2 + \frac{1}{2}m_2\dot{\bf r}_2^2 - U\left(\left|{\bf r}_2-{\bf r}_1\right|\right).
+\end{equation*}
+\noindent Expressed in terms of the relative position ${\bf r} = {\bf r}_1 - {\bf r}_2$ and the center of mass ${\bf R} = \left(m_1 {\bf r}_1 + m_2 {\bf r}_2\right)/M$, where the total mass $M = m_1 + m_2$, this becomes
+\begin{equation*}
+L = \frac{1}{2}\mu \dot{\bf r}^2 + \frac{1}{2}M\dot{\bf R}^2 - U\left(r\right),
+\end{equation*}
+\noindent with the reduced mass $\mu = m_1 m_2 / M$. Throughout, we will work in the center of mass frame, where $\bf{R} = 0$, and 
+\begin{equation*}
+L = \frac{1}{2}\mu \dot{\bf r}^2 - U\left(r\right),
+\end{equation*}
+\noindent which yields the equation of motion
+\begin{equation*}
+\frac{d}{dt}\left(\mu \dot{\bf r}\right) = \frac{dU}{dr} \hat{\bf r} \ \ \ \Rightarrow \ \ \ \ddot{\bf r} = \frac{1}{\mu} \frac{dU}{dr} \hat{\bf r}.
+\end{equation*}
+\noindent Using the equation of motion,
+\begin{equation*}
+\frac{d}{dt} \left({\bf r} \times \dot{\bf r}\right) = {\bf r} \times \ddot{\bf r} = 0,
+\end{equation*}
+\noindent which is simply angular momentum conservation, with the angular momentum ${\bf G} = \mu {\bf r} \times \dot{\bf r}$. Since ${\bf r} \bullet {\bf G} = 0$, and ${\bf G}$ is constant, $\bf r$ must lie in the plane perpendicular to ${\bf G}$. Therefore, we can express $\bf r$ in two dimensions$-$we choose polar coordinates $\left(r,\phi\right)$$-$and the Lagrangian becomes
+\begin{equation*}
+L = \frac{1}{2}\mu \left(\dot{r}^2+r^2\dot{\phi}^2\right) - U\left(r\right),
+\end{equation*}
+\noindent with corresponding conserved $\left(\partial L / \partial t = 0\right)$ energy (the hamiltonian is equal to the energy in this case)
+\begin{equation*}
+E = \frac{1}{2}\mu \left(\dot{r}^2+r^2\dot{\phi}^2\right) + U\left(r\right).
+\end{equation*}
+\noindent We can eliminate $\dot{\phi}$ in place of $r$ using angular momentum conservation, since\footnote{Alternatively, $0 = \partial L / \partial \phi = \dot{p_\phi} \Rightarrow p_\phi = \partial L / \partial \dot{\phi} = \mu r^2 \dot{\phi}  \Rightarrow \dot{\phi} = p_\phi / \mu r^2$.}
+\begin{equation}\label{g}
+{\bf G} = \mu r \hat{\bf r} \times \left(\dot{r} \hat{\bf r} + r \dot{\phi} \boldsymbol{\hat{\phi}}\right) = \mu r^2 \dot{\phi} \hat{\bf z} =  G \hat{\bf z} \ \ \ \Rightarrow \ \ \ \dot{\phi} = \frac{G}{\mu r^2},
+\end{equation}
+\noindent which gives
+\begin{equation*}
+E =\frac{1}{2} \mu \dot{r}^2 + \frac{G^2}{2 \mu r^2} + U\left(r\right).
+\end{equation*}
+\noindent Solving for $\dot r$, we obtain
+\begin{equation*}
+\dot{r} = \pm \left\{\frac{2}{\mu}\left[E-U\left(r\right)\right]-\frac{G^2}{\mu^2 r^2}\right\}^{1/2},
+\end{equation*}
+\noindent or
+\begin{equation}\label{rt}
+dt = \pm dr \left\{\frac{2}{\mu}\left[E-U\left(r\right)\right]-\frac{G^2}{\mu^2 r^2}\right\}^{-1/2} \ \ \ \Rightarrow \ \ \ t\left(r\right) - t_0 = \int dr \left\{\frac{2}{\mu}\left[E-U\left(r\right)\right]-\frac{G^2}{\mu^2 r^2}\right\}^{-1/2},
+\end{equation}
+\noindent where we've chosen the positive sign, which amounts to taking $t$ positive since the integrand is positive. Equation \ref{rt} gives a relationship between $r$ and $t$. To obtain a corresponding relationship between $\phi$ and $r$, we can use $d\phi = L dt / \mu r^2$:
+\begin{equation}\label{rp}
+d\phi = \pm dr \frac{G}{r^2} \left\{2 \mu \left[E-U\left(r\right)\right]-\frac{G^2}{r^2}\right\}^{-1/2} \ \ \ \Rightarrow \ \ \ \phi\left(r\right) - \phi_0 =  \int dr \frac{G}{r^2} \left\{2\mu \left[E-U\left(r\right)\right]-\frac{G^2}{ r^2}\right\}^{-1/2},
+\end{equation}
+\noindent where we've chosen the positive sign, which amounts to taking $\phi$ positive since the integrand is positive. Equations \ref{rt} and \ref{rp} give the general solution to the two body problem.
+\section{The Kepler Problem}
+\noindent The two body problem for the case $U \propto 1/r$ is Kepler's problem. We'll consider only an attractive potential
+\begin{equation}\label{pot}
+U\left(r\right) = - \frac{k}{r},
+\end{equation}
+\noindent with $k > 0$, applicable to the gravitational and electrostatic (for opposite charges) interactions. Substituting this potential  into equation \ref{rp} yields
+\begin{equation}\label{solvephi}
+\phi = \int dr \frac{G}{r^2} \left(2\mu E+ \frac{2 \mu k}{r}-\frac{G^2}{ r^2}\right)^{-1/2} = \cos^{-1}\left(\frac{G / r - \mu k / G}{\sqrt{2 \mu E + \mu^2 k^2 / G^2}}\right),
+\end{equation}
+\noindent or
+\begin{equation}\label{cs}
+\frac{p}{r} = 1+\epsilon \cos \phi,
+\end{equation}
+\noindent where $p = G^2 / \mu k$, $\epsilon = \sqrt{1+2 E G^2 / \mu k^2}$, and we've taken $\phi_0 = 0$. Equation \ref{cs} describes a conic section with one focus at the origin (the center of mass), latus rectum $2p$, eccentricity $\epsilon$, and perihelion (point on the orbit nearest to the origin) at $\phi = 0$. \\
+
+\noindent We'll specialize to bound states, $E < 0$, whose orbits are ellipses $\left(0 \le \epsilon < 1\right)$ with major axis
+\begin{equation*}
+a = \frac{p}{1-\epsilon^2} = \frac{k}{2\left|E\right|}
+\end{equation*}
+\noindent and minor axis
+\begin{equation*}
+b = \frac{p}{\sqrt{1-\epsilon^2}} = \frac{G}{\sqrt{2 \mu \left|E\right|}}.
+\end{equation*}
+\noindent For a segment of the path with angle $d\phi$, an area $dA = r^2 d\phi / 2$ is swept out. Using equation \ref{g}, this becomes $dA = G dt / 2 \mu$, or $dt = 2 \mu dA / G$, which we can integrate to give the period $T$ of the orbit:
+\begin{equation*}
+T = \frac{2 \mu A}{G} = \pi k \sqrt{\frac{\mu}{2\left|E\right|^3}} = 2 \pi \sqrt{\frac{\mu a^3}{k}},
+\end{equation*}
+\noindent where we used $A = \pi a b$ for an ellipse. \\
+
+\noindent Substituting the potential \ref{pot} into equation \ref{rt} yields
+\begin{equation*}
+t = \int dr \left(-\frac{2 \left|E\right|}{\mu}+\frac{2k}{\mu r}-\frac{G^2}{\mu^2 r^2}\right)^{-1/2} = \frac{T}{2 \pi} \left(x-\epsilon \sin x\right),
+\end{equation*}
+\noindent or
+\begin{equation}\label{kepeq}
+y = x-\epsilon \sin x,
+\end{equation}
+\noindent where
+\begin{equation}\label{r}
+r = a \left(1-\epsilon \cos x\right),
+\end{equation}
+\noindent $x$ is the \emph{eccentric anomaly}\footnote{\url{http://en.wikipedia.org/wiki/Eccentric_anomaly}}, $y = 2 \pi t / T$ is the \emph{mean anomaly}\footnote{\url{http://en.wikipedia.org/wiki/Mean_anomaly}}, and we've taken $t_0 = 0$, so that the perihelion is at $t=0$. \\
+
+\noindent The solution of Kepler's problem for  bound states in an attractive potential is thus reduced to solving Kepler's equation \ref{kepeq}, whose solution $x$ for a value of $y$ gives $r$ (equation \ref{r}) and $\phi$ (equation \ref{cs}) as a function of time $\left(t=yT/2\pi\right)$.
+
+\section{Kepler's Equation}
+\noindent Since $r\left(nT-t\right)=r\left(t\right)$ and $\phi\left(nT-t\right) = 2 \pi n - \phi\left(t\right)$, with $n$ integer, we need only determine the system's time evolution from $t = 0$ to $T/2$, a half period. At $t=0$, $x=y=0$, and at $t=T/2$, $x=y=\pi$, so we may focus on solving Kepler's equation for $y$ ranging linearly from $0$ to $\pi$, with $x$ in the range $0$ to $\pi$ for each $y$ value. The following sections aim to numerically solve Kepler's equation.
+
+\subsection{Iterative Method}
+
+\noindent Kepler's equation may be rewritten
+\begin{equation*}
+x = y + \epsilon \sin x,
+\end{equation*}
+\noindent which motivates us to employ an iterative scheme
+\begin{equation}\label{iteration}
+x_{n+1} = g\left(x_n\right),
+\end{equation}
+\noindent where
+\begin{equation}\label{kepg}
+g\left(x_n\right) = y + \epsilon \sin x_n
+\end{equation}
+\noindent and $x_0 = y$. \\
+
+\noindent For a general iterative scheme \ref{iteration}, the error in $x_n$, defined as $\Delta_n = x^*-x_n$, where $x^*=g\left(x^*\right)$, is:
+\begin{equation*}
+x^* - \Delta_{n+1} = g\left(x^*-\Delta_n\right) = x^* -  g'\left(x^*\right) \Delta_n + \frac{1}{2} g''\left(x^*\right) \Delta_n^2 + O\left(\Delta_n^3\right),
+\end{equation*}
+\noindent which simplifies to
+\begin{equation}\label{converge}
+\Delta_{n+1} =  g'\left(x^*\right) \Delta_n - \frac{1}{2} g''\left(x^*\right) \Delta_n^2 + O\left(\Delta_n^3\right).
+\end{equation}
+\noindent Neglecting $O\left(\Delta_n^2\right)$ terms,
+\begin{equation*}
+\Delta_{n+1} \approx g'\left(x^*\right) \Delta_n \approx \left[g'\left(x^*\right)\right]^{n+1} \Delta_0,
+\end{equation*}
+\noindent which shows that the iterative scheme \ref{iteration} converges if $\left|g'\left(x^*\right)\right| < 1$ and diverges if $\left|g'\left(x^*\right)\right| > 1$. If $\left|g'\left(x^*\right)\right| =0$ or $1$, $O\left(\Delta_n^2\right)$ terms must be considered. \\
+
+\noindent For Kepler's equation, $g\left(x_n\right)$ is given by equation \ref{kepg}, and
+\begin{equation*}
+g'\left(x_n\right) = \epsilon \cos x_n.
+\end{equation*}
+\noindent Since $\left|g'\left(x^*\right)\right| = \left|\epsilon\right| \left|\cos x^*\right| \le \left|\epsilon\right| < 1$, the iteration \ref{kepg} will theoretically converge.
+
+\noindent IMPLEMENTATION
+
+%%%%%
+
+\subsection{Aitken's Acceleration Method}
+
+\noindent If an iteration scheme is converging, $\Delta_{n+1} = C_n \Delta_n$, where $\left|C_n\right| < 1$. Near convergence, $C$ will be approximately constant, so that $\Delta_{n+1} \approx C \Delta_n$. Eliminating $C$ yields
+\begin{equation*}
+\frac{\Delta_{n+1}}{\Delta_n} \approx \frac{\Delta_{n+2}}{\Delta_{n+1}}.
+\end{equation*}
+\noindent Solving for $x^*$ yields
+\begin{equation}\label{aitken}
+x^* \approx \frac{x_n x_{n+2} - x^2_{n+1}}{x_{n+2}-2x_{n+1}+x_n}.
+\end{equation}
+\noindent Replacing $x_n$ by $x^*$, given by equation \ref{aitken}, can accelerate the convergence of some iterative schemes.
+
+\noindent Convergence.
+
+\noindent Implementation
+
+%%%%%
+
+\subsection{Root-Finding Methods}
+\noindent The problem of solving Kepler's equation may be recast into one of finding solutions $x^*$ of $f\left(x^*\right) = 0$, where
+\begin{equation*}
+f\left(x\right) = x - \epsilon \sin x - y.
+\end{equation*}
+\noindent Note that $f$ has a single root, since its derivative $f'\left(x\right) = 1 - \epsilon \cos x > 0$ for $\epsilon < 1$. The following are a few  methods of root-finding.
+
+%%%%%
+
+\subsubsection{Interval Bisection Method}
+\noindent A simple root-finding method is bisection, which after developing lower and upper bounds $x_L$ and $x_U$, respectively, for a root of a function $f$, bisects the interval at $x_M = \left(x_L+x_U\right)/2$ and determines in which half of the interval the root must lie. If $f\left(x_L\right) f\left(x_M\right) \le 0$, the root is between $x_L$ and $x_M$; otherwise, it's between $x_M$ and $x_U$. In the former case, the method takes $x_R \rightarrow x_M$, and in the latter case, $x_L \rightarrow x_M$, and the process iterates. The convergence of the bisection method is given simply by
+\begin{equation*}
+\Delta_{n+1} = \frac{1}{2} \Delta_n.
+\end{equation*}
+\noindent If a root is desired to a tolerance $\delta$, then the number of necessary iterations $n$ may be bounded:
+\begin{equation*}
+\delta > \Delta_{n} = \frac{1}{2^{n-1}} \Delta_1 = \frac{x_U-x_L}{2^{n-1}} \ \ \ \Rightarrow \ \ \ n > \log_2 \left(\frac{x_U-x_L}{\delta}\right).
+\end{equation*}
+\noindent For solving Kepler's equation, we choose $x_U = \pi$, $x_L = 0$, and $\delta = 5 \times 10^{-15}$, so that $n > 49$. In running kepler.f, we find $n=50>49$.
+
+%%%%%
+
+\subsubsection{Newton's Method}
+\noindent Newton's method approximates the roots of a function $f$ by linearly expanding it about $x_n$, evaluating the expansion at $x_{n+1}$, and setting the result to zero,
+\begin{equation}\label{linear}
+0 = f\left(x_{n+1}\right) \approx f\left(x_n\right) + \left(x_{n+1} - x_n\right) f'\left(x_n\right) \Rightarrow x_{n+1} = x_n - \frac{f\left(x_n\right)}{f'\left(x_n\right)},
+\end{equation}
+\noindent so that the iterative equation \ref{iteration} takes the specific form
+\begin{equation}\label{new}
+g\left(x_n\right) = x_n - \frac{f\left(x_n\right)}{f'\left(x_n\right)}.
+\end{equation}
+\noindent For Kepler's equation,
+\begin{equation*}
+g\left(x_n\right) = x_n + \frac{y - x_n + \epsilon \sin x_n}{1-\epsilon \cos x_n}.
+\end{equation*}
+
+\noindent To analyze Newton's method's convergence, the first derivative of $g$ is
+\begin{equation*}
+g' = \frac{f f''}{f'^2},
+\end{equation*}
+\noindent which vanishes at $x=x^*$ since $f\left(x^*\right) = 0$. The second derivative is
+\begin{equation*}
+g'' =  \frac{f'^2 f'' + f f' f''' - 2 f f''^2}{f'^3}.
+\end{equation*}
+\noindent Evaluated at $x=x^*$, this becomes
+\begin{equation*}
+g''\left(x^*\right) =  \frac{f''\left(x^*\right)}{f'\left(x^*\right)},
+\end{equation*}
+\noindent again since $f\left(x^*\right) = 0$. Referring to equation \ref{converge},
+\begin{equation*}
+\Delta_{n+1} \approx \left[ - \frac{f''\left(x^*\right)}{2f'\left(x^*\right)} \right] \Delta_n^2.
+\end{equation*}
+\noindent For Kepler's equation,
+\begin{equation*}
+\Delta_{n+1} \approx \frac{1}{2} \left(\cot x^* - \csc x^* / \epsilon\right)^{-1} \Delta_n^2.
+\end{equation*}
+
+\subsubsection{Secant Method}
+\noindent If the derivative of $f$ is unavailable or cumbersome, one can replace the derivative in \ref{new} with a secant line approximation, which depends only on the function itself:
+\begin{equation*}
+f'\left(x_n\right) \approx \frac{f\left(x_{n}\right)-f\left(x_{n-1}\right)}{x_{n}-x_{n-1}} \ \ \ \Rightarrow \ \ \ x_{n+1} = x_n - \frac{x_n-x_{n-1}}{f\left(x_n\right)-f\left(x_{n-1}\right)} f\left(x_n\right).
+\end{equation*}
+\noindent This iteration scheme depends on the two previous values and not just one:
+\begin{equation*}
+x_{n+1} = h\left(x_{n-1},x_n\right),
+\end{equation*}
+\noindent where
+\begin{equation*}
+h\left(x_{n-1},x_n\right) = x_n - \frac{x_n-x_{n-1}}{f\left(x_n\right)-f\left(x_{n-1}\right)} f\left(x_n\right).
+\end{equation*}
+\noindent For Kepler's equation,
+\begin{equation*}
+h\left(x_{n-1},x_n\right) = x_n - \left[1  + \frac{\epsilon \left(\sin x_{n+1}-  \sin x_n \right)}{x_n - x_{n+1}}\right]^{-1} \left(x_n - \epsilon \sin x_n - y\right).
+\end{equation*}
+
+\end{document}
