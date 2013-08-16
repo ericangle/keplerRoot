@@ -2,14 +2,15 @@
 
 // g++ main.cpp -o executable_name
 
-// Note about PDF explaining background
+// See problemDescription/keplerRoot.pdf
 
 // This program solves Kepler's equation y = x - e*sin(x) for the eccentric anomaly
 // x, given the mean anomaly y and eccentricity e, using an iteration method and the
 // bisection, Newton, and secant root-finding methods.
 
+// To do: Aitken's acceleration
+
 #include <iostream>
-#include <math.h>
 #include <cmath>
 using namespace std;
 
@@ -46,7 +47,7 @@ int main() {
     for (int j = 0; j < 32; j++) {
       y = ((double) j)/10.0; // Mean anomaly values: 0.0, 0.1, ..., 3.1
       cout << "eps = " << eps << ", y = " << y << endl;
-      cout << "--------------------" << endl;      
+      cout << "----------------------" << endl;      
 
       // Fixed point iteration
       n = 0;
@@ -155,13 +156,3 @@ void outputLine(string algType, double root, int n, int stop) {
   }
   cout << endl;
 }
-
-// Aitken's acceleration
-//SUBROUTINE aitken(root, new1, new2, tol)
-//  implicit none
-//  double precision root, new1, new2, numer, denom, tol
-//  numer = root*new2 - new1*new1
-//  denom = new2 - 2.d0*new1 + root
-//  IF (denom.GT.tol) THEN
-//    root = numer/denom
-//  END IF
