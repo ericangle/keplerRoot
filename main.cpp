@@ -4,11 +4,17 @@
 
 // See problemDescription/keplerRoot.pdf
 
-// This program solves Kepler's equation y = x - e*sin(x) for the eccentric anomaly
-// x, given the mean anomaly y and eccentricity e, using an iteration method and the
+// This program solves Kepler's equation y = x - eps*sin(x) for the eccentric anomaly
+// x, given the mean anomaly y and eccentricity eps, using an iteration method and the
 // bisection, Newton, and secant root-finding methods.
 
-// To do: Aitken's acceleration
+/* To do:
+1. Aitken's acceleration
+2. command line arguments
+3. root finding methods part of class?
+4. separate class for kepler, each problem an instance??
+5. hybrid methods
+*/
 
 #include <iostream>
 #include <cmath>
