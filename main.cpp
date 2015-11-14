@@ -1,21 +1,3 @@
-// The Kepler Problem and Root Finding
-
-// g++ main.cpp -o executable_name
-
-// See problemDescription/keplerRoot.pdf
-
-// This program solves Kepler's equation y = x - eps*sin(x) for the eccentric anomaly
-// x, given the mean anomaly y and eccentricity eps, using an iteration method and the
-// bisection, Newton, and secant root-finding methods.
-
-/* To do:
-1. Aitken's acceleration
-2. command line arguments
-3. root finding methods part of class?
-4. separate class for kepler, each problem an instance??
-5. hybrid methods
-*/
-
 #include <iostream>
 #include <cmath>
 using namespace std;
